@@ -11,6 +11,8 @@
 
 **Continuation of [Project Gatekeeper](https://github.com/BabsBBG/project-gatekeeper)** — where Gatekeeper secured the identity layer of the Helix-Pulse merger, Operation Echelon secures the network layer of Pulse's 5G infrastructure.
 
+**Read about my thought process for this project here-[Medium](https://medium.com/@tobibabalola21/the-72-hour-window-how-i-built-a-5g-aware-soc-that-detects-ddos-attacks-and-auto-blocks-them-in-1-b1c70562e14f) 
+
 ---
 
 ## Table of Contents
