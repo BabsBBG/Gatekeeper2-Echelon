@@ -55,8 +55,11 @@ This project is the SOC's response — a complete pipeline from dark web threat 
 ---
 
 ## Architecture
+<<<<<<< HEAD
 
 ```
+=======
+>>>>>>> 1963a91705780a42e01605abaefaaec3649c32ed
 [Dark Web Simulation] → [IOC Extraction] → [SQLite Blacklist]
                                 ↓
                           [Splunk SIEM]
@@ -73,8 +76,11 @@ This project is the SOC's response — a complete pipeline from dark web threat 
                   [SOAR Auto-Response — iptables]
                                 ↓
                       [Splunk Incident Timeline]
+<<<<<<< HEAD
 ```
 
+=======
+>>>>>>> 1963a91705780a42e01605abaefaaec3649c32ed
 ---
 
 ## Lab Environment
