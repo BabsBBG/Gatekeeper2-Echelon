@@ -57,24 +57,21 @@ This project is the SOC's response. A complete pipeline from dark web threat int
 
 ## Architecture
 [Dark Web Simulation] → [IOC Extraction] → [SQLite Blacklist]
-↓
-[Splunk SIEM]
-↓
-[5G Network - Open5GS Core]
-(AMF / SMF / UPF / Slicing)
-↓
-[UERANSIM - gNB + UE Simulation]
-↓
-[DDoS Attack Simulation - hping3]
-↓
-[Zeek Detection + AI Anomaly Detection]
-↓
-[SOAR Auto-Response - iptables]
-↓
-[Splunk Incident Timeline]
-
-text
-
+                                ↓
+                          [Splunk SIEM]
+                                ↓
+                    [5G Network — Open5GS Core]
+                       (AMF / SMF / UPF / Slicing)
+                                ↓
+                  [UERANSIM — gNB + UE Simulation]
+                                ↓
+                  [DDoS Attack Simulation — hping3]
+                                ↓
+              [Zeek Detection + AI Anomaly Detection]
+                                ↓
+                  [SOAR Auto-Response — iptables]
+                                ↓
+                      [Splunk Incident Timeline]
 ---
 
 ## Lab Environment
