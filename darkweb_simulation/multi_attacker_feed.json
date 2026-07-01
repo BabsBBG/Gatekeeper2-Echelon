@@ -1,0 +1,32 @@
+[
+  {
+    "post_id": "NM-2026-0031",
+    "threat_actor": "null_meridian",
+    "attacker_ip": "192.168.56.105",
+    "method": "UDP flood + SYN flood",
+    "target": "helix-pulse-spectranet.co.uk",
+    "slice_target": "URLLC",
+    "confidence": "HIGH",
+    "timestamp": "2026-06-16T03:22:00Z"
+  },
+  {
+    "post_id": "GH-2026-0044",
+    "threat_actor": "ghost_vector",
+    "attacker_ip": "192.168.56.110",
+    "method": "HTTP flood",
+    "target": "helix-pulse-spectranet.co.uk",
+    "slice_target": "eMBB",
+    "confidence": "MEDIUM",
+    "timestamp": "2026-06-16T05:10:00Z"
+  },
+  {
+    "post_id": "RX-2026-0012",
+    "threat_actor": "r3dline",
+    "attacker_ip": "192.168.56.111",
+    "method": "ICMP flood",
+    "target": "helix-pulse-spectranet.co.uk",
+    "slice_target": "mMTC",
+    "confidence": "LOW",
+    "timestamp": "2026-06-16T07:45:00Z"
+  }
+]

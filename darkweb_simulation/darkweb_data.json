@@ -1,0 +1,16 @@
+{
+  "post_id": "NM-2026-0031",
+  "threat_actor": "null_meridian",
+  "forum": "darkweb_simulation",
+  "timestamp": "2026-06-16T03:22:00Z",
+  "threat": "DDoS campaign — disruption for hire",
+  "target": "helix-pulse-spectranet.co.uk",
+  "target_detail": "5G UPF endpoint — enterprise URLLC slice",
+  "attacker_ip": "192.168.56.105",
+  "method": "UDP flood + SYN flood combined",
+  "timeline_hours": 72,
+  "motivation": "commissioned — critical infrastructure disruption",
+  "confidence": "HIGH",
+  "slice_target": "URLLC",
+  "sst": 2
+}
