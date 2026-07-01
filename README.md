@@ -37,7 +37,7 @@ Pulse brings no mature security capability into the deal: no SIEM, no threat int
 
 That assessment proves optimistic by 60 days.
 
-**Day 31 post-announcement:** Dark web monitoring surfaces a post from threat actor **null_meridian** a commissioned DDoS campaign specifically targeting the enterprise URLLC slice serving local authority contracts. The SOC has 72 hours.
+**Day 31 post-announcement:** Dark web monitoring surfaces a post from threat actor **null_meridian**,  a commissioned DDoS campaign specifically targeting the enterprise URLLC slice serving local authority contracts. The SOC has 72 hours.
 
 This project is the SOC's response. A complete pipeline from dark web threat intelligence through to automated, sub-second mitigation.
 
