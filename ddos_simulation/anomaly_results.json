@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-06-29T12:50:54.958187",
+  "total_connections": 661735,
+  "anomalies_detected": 20,
+  "anomaly_rate": "0.0%",
+  "top_anomalous_ips": {
+    "192.168.56.104": 5,
+    "192.168.56.102": 5,
+    "192.168.56.103": 4,
+    "192.168.56.105": 4,
+    "192.168.56.1": 2
+  },
+  "detection_method": "IsolationForest",
+  "contamination": 0.05
+}
