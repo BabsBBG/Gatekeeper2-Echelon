@@ -37,9 +37,9 @@ Pulse brings no mature security capability into the deal: no SIEM, no threat int
 
 That assessment proves optimistic by 60 days.
 
-**Day 31 post-announcement:** Dark web monitoring surfaces a post from threat actor **null_meridian** — a commissioned DDoS campaign specifically targeting the enterprise URLLC slice serving local authority contracts. The SOC has 72 hours.
+**Day 31 post-announcement:** Dark web monitoring surfaces a post from threat actor **null_meridian** a commissioned DDoS campaign specifically targeting the enterprise URLLC slice serving local authority contracts. The SOC has 72 hours.
 
-This project is the SOC's response — a complete pipeline from dark web threat intelligence through to automated, sub-second mitigation.
+This project is the SOC's response. A complete pipeline from dark web threat intelligence through to automated, sub-second mitigation.
 
 ---
 
@@ -55,32 +55,28 @@ This project is the SOC's response — a complete pipeline from dark web threat 
 ---
 
 ## Architecture
-<<<<<<< HEAD
+
 
 ```
-=======
->>>>>>> 1963a91705780a42e01605abaefaaec3649c32ed
 [Dark Web Simulation] → [IOC Extraction] → [SQLite Blacklist]
                                 ↓
                           [Splunk SIEM]
                                 ↓
-                    [5G Network — Open5GS Core]
+                    [5G Network - Open5GS Core]
                        (AMF / SMF / UPF / Slicing)
                                 ↓
-                  [UERANSIM — gNB + UE Simulation]
+                  [UERANSIM - gNB + UE Simulation]
                                 ↓
-                  [DDoS Attack Simulation — hping3]
+                  [DDoS Attack Simulation - hping3]
                                 ↓
               [Zeek Detection + AI Anomaly Detection]
                                 ↓
-                  [SOAR Auto-Response — iptables]
+                  [SOAR Auto-Response - iptables]
                                 ↓
                       [Splunk Incident Timeline]
-<<<<<<< HEAD
+
 ```
 
-=======
->>>>>>> 1963a91705780a42e01605abaefaaec3649c32ed
 ---
 
 ## Lab Environment
@@ -116,7 +112,7 @@ This project is the SOC's response — a complete pipeline from dark web threat 
 
 ### Phase 1 — Lab Architecture & Base Setup
 
-Four Ubuntu 24.04 LTS VMs provisioned in VirtualBox, each with dual network adapters — NAT for internet access during installs, Host-only for lab-to-lab communication on the 192.168.56.0/24 subnet.
+Four Ubuntu 24.04 LTS VMs provisioned in VirtualBox, each with dual network adapters, NAT for internet access during installs, Host-only for lab-to-lab communication on the 192.168.56.0/24 subnet.
 
 | VM | Role | Installed |
 |----|------|-----------|
@@ -162,7 +158,7 @@ python3 threat_intel/ioc_extractor.py
 
 ### Phase 3 — SIEM Integration (Splunk)
 
-IOCs and all downstream events are pushed to Splunk via HTTP Event Collector (HEC). `splunk_forwarder.py` handles event delivery for three event types — IOC, AI anomaly, SOAR action. `siem_pipeline.py` orchestrates the full ingestion run. Eight SPL detection queries are documented in `splunk_queries.md`, including a full incident-timeline correlation query.
+IOCs and all downstream events are pushed to Splunk via HTTP Event Collector (HEC). `splunk_forwarder.py` handles event delivery for three event types. IOC, AI anomaly, SOAR action. `siem_pipeline.py` orchestrates the full ingestion run. Eight SPL detection queries are documented in `splunk_queries.md`, including a full incident-timeline correlation query.
 
 **HEC config:**
 - URL: `https://192.168.56.104:8088/services/collector`
@@ -188,9 +184,9 @@ curl -k https://192.168.56.104:8088/services/collector \
 
 ### Phase 4 — 5G Network Simulation
 
-Open5GS runs a complete 5G Standalone core (AMF, SMF, UPF, NRF, UDM, AUSF, PCF) on VM1. UERANSIM simulates a base station (gNB) and connected device (UE) on VM2, registered against a subscriber profile (IMSI `999700000000001`) in Open5GS. Three network slices are configured — eMBB, URLLC, mMTC — with Linux `tc` HTB traffic shaping enforcing slice-specific QoS. URLLC (the enterprise slice) receives guaranteed bandwidth at the highest priority.
+Open5GS runs a complete 5G Standalone core (AMF, SMF, UPF, NRF, UDM, AUSF, PCF) on VM1. UERANSIM simulates a base station (gNB) and connected device (UE) on VM2, registered against a subscriber profile (IMSI `999700000000001`) in Open5GS. Three network slices are configured - eMBB, URLLC, mMTC - with Linux `tc` HTB traffic shaping enforcing slice-specific QoS. URLLC (the enterprise slice) receives guaranteed bandwidth at the highest priority.
 
-Open5GS and UERANSIM were operated entirely via CLI and systemd — consistent with how 5G core infrastructure is managed in production telecoms environments. The WebUI was used only for initial subscriber registration.
+Open5GS and UERANSIM were operated entirely via CLI and systemd, consistent with how 5G core infrastructure is managed in production telecoms environments. The WebUI was used only for initial subscriber registration.
 
 **Slice design:**
 
@@ -226,7 +222,7 @@ sudo ./build/nr-ue -c config/open5gs-ue.yaml
 
 ### Phase 5 — Attack Simulation & AI Detection
 
-A DDoS attack is launched from VM4 using `hping3` — a SYN flood plus a UDP flood specifically targeting port 2152 (GTP-U, the 5G user plane protocol). This targets the 5G data path directly rather than a generic service port, making this a 5G-aware attack. Zeek monitors lab traffic with a custom detection script (`ddos_detect.zeek`) that raises notices for both attack types. `anomaly_detector.py` trains an Isolation Forest model on baseline traffic and scores live traffic during the attack, flagging anomalous connections and forwarding them to Splunk.
+A DDoS attack is launched from VM4 using `hping3` a SYN flood plus a UDP flood specifically targeting port 2152 (GTP-U, the 5G user plane protocol). This targets the 5G data path directly rather than a generic service port, making this a 5G-aware attack. Zeek monitors lab traffic with a custom detection script (`ddos_detect.zeek`) that raises notices for both attack types. `anomaly_detector.py` trains an Isolation Forest model on baseline traffic and scores live traffic during the attack, flagging anomalous connections and forwarding them to Splunk.
 
 **Attack commands (VM4):**
 
@@ -284,7 +280,7 @@ sudo python3 mitigation/auto_responder.py --mode recover
 
 ### Phase 7 — Visualization & Final Dashboard
 
-A fully populated Splunk dashboard with four panels — IOC events, AI anomaly detections, attack traffic timechart showing the DDoS spike, and the complete SOAR audit trail showing automated block and recovery events.
+A fully populated Splunk dashboard with four panels. IOC events, AI anomaly detections, attack traffic timechart showing the DDoS spike, and the complete SOAR audit trail showing automated block and recovery events.
 
 ![iptables recovered](screenshots/phase7/phase7_01_iptables_recovered.png)
 ![Splunk recovery event](screenshots/phase7/phase7_02_splunk_recovery_event.png)
@@ -389,7 +385,7 @@ if (c$id$proto == 17) { ... }  # UDP
 
 **Issue:** Attacker IP not clearly singled out among AI anomaly results.
 
-**Cause:** Baseline was only 7 records — insufficient for Isolation Forest to learn meaningful normal traffic patterns.
+**Cause:** Baseline was only 7 records, insufficient for Isolation Forest to learn meaningful normal traffic patterns.
 
 **Note:** Documented as a known lab constraint. A 5-minute baseline produces tighter isolation. The attacker IP was still correctly included among the flagged anomalies.
 
@@ -399,9 +395,9 @@ if (c$id$proto == 17) { ... }  # UDP
 
 **Issue:** `ping -I ogstun 8.8.8.8` failed with 100% packet loss despite correct iptables MASQUERADE rules.
 
-**Cause:** VirtualBox NAT engine does not forward packets originating from secondary VM subnets to the internet — a hypervisor-level constraint, not a Linux routing problem (confirmed via tcpdump showing packets leaving ogstun but never appearing on enp0s3).
+**Cause:** VirtualBox NAT engine does not forward packets originating from secondary VM subnets to the internet, a hypervisor-level constraint, not a Linux routing problem (confirmed via tcpdump showing packets leaving ogstun but never appearing on enp0s3).
 
-**Impact:** None — all Phase 5/6 attacks target internal lab IPs over the Host-only network, which functions correctly. Documented in `5g_network/lab_limitations.md`.
+**Impact:** None - all Phase 5/6 attacks target internal lab IPs over the Host-only network, which functions correctly. Documented in `5g_network/lab_limitations.md`.
 
 ---
 
