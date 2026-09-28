@@ -8,14 +8,15 @@
 
 ## Background
 
-**Helix-Pulse Communications** acquires Spectranet, a regional
-5G operator serving 340,000 subscribers across North England
+**Helix-Pulse Communications** acquires Spectranet, a fictional regional
+5G operator serving 340,000 subscribers across Northern England
 and the Midlands.
 
 Spectranet operates a 5G Standalone core with no formal SOC,
-no SIEM, and no threat intelligence capability.
+SIEM, or threat intelligence capability.
 
 The Helix-Pulse CISO raises a Priority 1 concern:
+
 > "We are absorbing a 5G core network during a publicly
 > announced transaction window. Threat actors monitor M&A
 > announcements. We have approximately 90 days before this
@@ -29,30 +30,43 @@ That assessment proves optimistic by 60 days.
 
 **Day 31 post-announcement.**
 
-Dark web monitoring surfaces a post from threat actor
-**null_meridian** targeting Helix-Pulse's 5G infrastructure.
-A commissioned DDoS campaign specifically targets the
-enterprise URLLC slice serving local authority contracts.
+Simulated dark-web monitoring surfaces a post from the fictional
+threat actor **null_meridian** targeting Helix-Pulse's 5G
+infrastructure.
 
-The SOC has 72 hours.
+Within the scenario, the threat intelligence identifies the
+enterprise URLLC slice serving local-authority contracts as the
+intended target of a commissioned DDoS campaign.
+
+The SOC has 72 hours to investigate and respond.
+
+> **Lab implementation:** The subsequent traffic simulation uses
+> SYN flooding against TCP/80 and UDP flooding against port 2152,
+> the standard GTP-U service port. It does not emulate a complete
+> carrier-grade GTP-U attack against a live URLLC network slice.
 
 ---
 
 ## Lab Network
 
 | VM | Role | IP |
-|----|------|----|
-| VM1 | Open5GS 5G Core | 192.168.56.102 |
-| VM2 | UERANSIM (gNB + UE) | 192.168.56.103 |
-| VM3 | SOC Stack (Splunk/Zeek/Grafana) | 192.168.56.104 |
-| VM4 | Attacker (null_meridian) | 192.168.56.105 |
+|---|---|---|
+| VM1 | Open5GS 5G Core | `192.168.56.102` |
+| VM2 | UERANSIM (gNB + UE) | `192.168.56.103` |
+| VM3 | SOC Stack (Splunk / Zeek / Grafana) | `192.168.56.104` |
+| VM4 | Attack Simulation (`null_meridian`) | `192.168.56.105` |
 
 ---
 
 ## Safety Notice
 
-All attack simulation conducted within an isolated VirtualBox
-lab. null_meridian is a fictional threat actor.
-No real networks or IPs are targeted.
+All attack simulations were conducted within an isolated
+VirtualBox lab. `null_meridian` is a fictional threat actor.
 
-**Author:** Oluwatobi Babalola | **GitHub:** BabsBBG
+No real networks, organisations, subscribers, or public IP
+addresses were targeted.
+
+---
+
+**Author:** Oluwatobi Babalola  
+**GitHub:** `BabsBBG`
