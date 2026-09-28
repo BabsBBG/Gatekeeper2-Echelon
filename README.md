@@ -41,7 +41,7 @@ That assessment proves optimistic by 60 days.
 
 **Day 31 post-announcement:** Dark web monitoring surfaces a post from threat actor **null_meridian**,  a commissioned DDoS campaign specifically targeting the enterprise URLLC slice serving local authority contracts. The SOC has 72 hours.
 
-This project is the SOC's response. A complete pipeline from dark web threat intelligence through to automated, sub-second mitigation.
+This project is the SOC's response: a lab pipeline spanning simulated dark web threat intelligence, detection, analysis, and automated mitigation.
 
 ---
 
@@ -102,10 +102,10 @@ This project is the SOC's response. A complete pipeline from dark web threat int
 |--------|-------|
 | **IOCs Extracted** | 3 |
 | **IOCs Auto-Blocked** | 2 (HIGH + MEDIUM confidence) |
-| **AI Anomalies Detected** | 20 (out of 323,402 connections) |
+| **AI Anomalies Detected** | 20 (out of 323,402 connections; experimental lab signal) |
 | **Automated mitigation execution time** | **1.084 seconds** |
-| **Zeek Detections** | DDoS_SYN_Flood, DDoS_GTP_Flood (5G-specific) |
-| **Network Slices** | 3 (eMBB, URLLC, mMTC) with enforced QoS |
+| **Zeek Detections** | DDoS_SYN_Flood, DDoS_GTP_Flood (UDP/2152-targeted)
+| **Network Slices** | 3 (eMBB, URLLC, mMTC) with lab-configured QoS using Linux tc |
 | **UE IP** | 10.45.0.9 |
 
 ---
@@ -223,7 +223,7 @@ sudo ./build/nr-ue -c config/open5gs-ue.yaml
 ---
 
 ### Phase 5 — Attack Simulation & AI Detection
-A controlled DDoS simulation is launched from VM4 using `hping3`, generating a SYN flood and a UDP flood targeting port 2152, the service port commonly associated with GTP-U. This exercises detection against traffic directed at a 5G-associated service port without claiming that the generated packets represent valid GTP-U tunnel traffic. Zeek monitors lab traffic with a custom detection script (`ddos_detect.zeek`) that raises notices for both attack types. `anomaly_detector.py` trains an Isolation Forest model on baseline traffic and scores live traffic during the attack, flagging anomalous connections and forwarding them to Splunk.
+A controlled DDoS simulation is launched from VM4 using `hping3`, generating a SYN flood and a UDP flood targeting port 2152, the service port commonly associated with GTP-U. This exercises detection against traffic directed at a 5G-associated service port without claiming that the generated packets represent valid GTP-U tunnel traffic. Zeek monitors lab traffic with a custom detection script (`ddos_detect.zeek`) that raises notices for both attack types. anomaly_detector.py trains an experimental Isolation Forest model on the small lab baseline dataset and scores traffic during the simulation. Its output is treated as an additional anomaly signal rather than an authoritative detection source, with flagged connections forwarded to Splunk.
 
 **Attack commands (VM4):**
 
@@ -387,7 +387,7 @@ if (c$id$proto == 17) { ... }  # UDP
 
 **Cause:** Baseline was only 7 records, insufficient for Isolation Forest to learn meaningful normal traffic patterns.
 
-**Note:** Documented as a known lab constraint. A 5-minute baseline produces tighter isolation. The attacker IP was still correctly included among the flagged anomalies.
+**Note:** Documented as a known lab constraint. A 5-minute baseline produces tighter isolation. The attacker IP was included among the flagged anomalies, but the model did not uniquely distinguish it from other anomalous connections.
 
 ---
 
