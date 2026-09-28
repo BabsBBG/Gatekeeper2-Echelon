@@ -92,8 +92,7 @@ A longer and more representative baseline would be required to properly evaluate
 | Technique | ID | Lab Mapping |
 |---|---|---|
 | **Network Denial of Service: Direct Network Flood** | T1498.001 | SYN and UDP flood simulations against the lab 5G-core host |
-| **Endpoint Denial of Service: Service Exhaustion Flood** | T1499.002 | UDP flood directed at port 2152 to exercise service-exhaustion detection |
-| **Resource Hijacking** | T1496 | Sustained traffic used to exercise resource-consumption monitoring in the lab |
+
 
 > **Scope note:** The UDP simulation targeted port `2152`, commonly used by GTP-U. It did not construct full GTP-U protocol traffic or reproduce a carrier-grade GTP-U attack.
 
@@ -155,7 +154,7 @@ index=* (
 )
 | eval stage=case(
     sourcetype=="threat_intel", "1_IOC_DETECTED",
-    sourcetype=="ai_anomaly_detection", "2_ATTACK_DETECTED",
+    sourcetype=="ai_anomaly_detection", "2_ANOMALY_FLAGGED",
     sourcetype=="soar_response", "3_RESPONSE_TAKEN"
 )
 | table _time, stage, sourcetype, attacker_ip,
