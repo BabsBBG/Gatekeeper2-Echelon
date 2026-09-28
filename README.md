@@ -103,7 +103,7 @@ This project is the SOC's response. A complete pipeline from dark web threat int
 | **IOCs Extracted** | 3 |
 | **IOCs Auto-Blocked** | 2 (HIGH + MEDIUM confidence) |
 | **AI Anomalies Detected** | 20 (out of 323,402 connections) |
-| **MTTR** | **1.084 seconds** |
+| **Automated mitigation execution time** | **1.084 seconds** |
 | **Zeek Detections** | DDoS_SYN_Flood, DDoS_GTP_Flood (5G-specific) |
 | **Network Slices** | 3 (eMBB, URLLC, mMTC) with enforced QoS |
 | **UE IP** | 10.45.0.9 |
@@ -223,8 +223,7 @@ sudo ./build/nr-ue -c config/open5gs-ue.yaml
 ---
 
 ### Phase 5 — Attack Simulation & AI Detection
-
-A DDoS attack is launched from VM4 using `hping3` a SYN flood plus a UDP flood specifically targeting port 2152 (GTP-U, the 5G user plane protocol). This targets the 5G data path directly rather than a generic service port, making this a 5G-aware attack. Zeek monitors lab traffic with a custom detection script (`ddos_detect.zeek`) that raises notices for both attack types. `anomaly_detector.py` trains an Isolation Forest model on baseline traffic and scores live traffic during the attack, flagging anomalous connections and forwarding them to Splunk.
+A controlled DDoS simulation is launched from VM4 using `hping3`, generating a SYN flood and a UDP flood targeting port 2152, the service port commonly associated with GTP-U. This exercises detection against traffic directed at a 5G-associated service port without claiming that the generated packets represent valid GTP-U tunnel traffic. Zeek monitors lab traffic with a custom detection script (`ddos_detect.zeek`) that raises notices for both attack types. `anomaly_detector.py` trains an Isolation Forest model on baseline traffic and scores live traffic during the attack, flagging anomalous connections and forwarding them to Splunk.
 
 **Attack commands (VM4):**
 
@@ -270,8 +269,7 @@ sudo python3 mitigation/auto_responder.py --mode respond
 sudo python3 mitigation/auto_responder.py --mode recover
 ```
 
-**Result:** MTTR (SOAR trigger → iptables rule applied) of **1.084 seconds**. 2 IPs blocked automatically, 1 skipped for manual review.
-
+**Result:** Automated mitigation execution time (SOAR trigger → iptables rule applied) was **1.084 seconds**. 2 IPs were blocked automatically, while 1 was skipped for manual review.
 ![SOAR error debug](screenshots/phase6/phase6_01_soar_error.png)
 ![iptables blocked](screenshots/phase6/phase6_02_iptables_blocked.png)
 ![SOAR summary](screenshots/phase6/phase6_03_soar_summary.png)
@@ -484,4 +482,4 @@ LinkedIn: [Oluwatobi Babalola](https://linkedin.com/in/oluwatobi-babalola)
 
 ---
 
-**The automation gap between "threat surfaced" and "IOC actioned" collapsed to 1.084 seconds.**
+**The automated response stage completed in 1.084 seconds from SOAR trigger to iptables rule application.**
