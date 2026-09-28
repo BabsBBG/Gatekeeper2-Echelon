@@ -12,7 +12,7 @@ import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 HEC_URL   = "https://192.168.56.104:8088/services/collector"
-HEC_TOKEN = "622b28d0-3013-46e2-8da2-8958223eda9d"
+HEC_TOKEN = ""SPLUNK_HEC_TOKEN""
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, PROJECT_ROOT)
 
