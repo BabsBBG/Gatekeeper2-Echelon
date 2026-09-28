@@ -269,7 +269,7 @@ sudo python3 mitigation/auto_responder.py --mode respond
 sudo python3 mitigation/auto_responder.py --mode recover
 ```
 
-**Result:** Automated mitigation execution time (SOAR trigger → iptables rule applied) was **1.084 seconds**. 2 IPs were blocked automatically, while 1 was skipped for manual review.
+Result: Automated mitigation execution time (responder invocation → iptables rule applied) was 1.084 seconds. 2 IPs were blocked automatically, while 1 was skipped for manual review.
 ![SOAR error debug](screenshots/phase6/phase6_01_soar_error.png)
 ![iptables blocked](screenshots/phase6/phase6_02_iptables_blocked.png)
 ![SOAR summary](screenshots/phase6/phase6_03_soar_summary.png)
