@@ -188,7 +188,7 @@ curl -k https://192.168.56.104:8088/services/collector \
 
 Open5GS runs a complete 5G Standalone core (AMF, SMF, UPF, NRF, UDM, AUSF, PCF) on VM1. UERANSIM simulates a base station (gNB) and connected device (UE) on VM2, registered against a subscriber profile (IMSI `999700000000001`) in Open5GS. Three network slices are configured - eMBB, URLLC, mMTC - with Linux `tc` HTB traffic shaping enforcing slice-specific QoS. URLLC (the enterprise slice) receives guaranteed bandwidth at the highest priority.
 
-Open5GS and UERANSIM were operated entirely via CLI and systemd, consistent with how 5G core infrastructure is managed in production telecoms environments. The WebUI was used only for initial subscriber registration.
+Open5GS and UERANSIM were operated primarily via CLI and systemd, with the WebUI used only for initial subscriber registration.
 
 **Slice design:**
 
